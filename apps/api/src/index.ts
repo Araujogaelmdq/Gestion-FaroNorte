@@ -28,21 +28,14 @@ declare module 'fastify' {
 async function buildServer() {
   const fastify = Fastify({
     logger: true,
+    trustProxy: true,
   });
 
   // CORS
   await fastify.register(fastifyCors, {
     origin: (origin, cb) => {
-      // Permitir solicitudes del front en desarrollo y sin origen (e.g. apps móviles / curl)
-      if (!origin || origin.includes('localhost') || origin.includes('127.0.0.1')) {
-        cb(null, true);
-        return;
-      }
-      if (origin === env.CORS_ORIGIN) {
-        cb(null, true);
-        return;
-      }
-      cb(new Error('No permitido por CORS'), false);
+      // Permitir solicitudes del mismo dominio, localhost, o cualquier cliente de la PWA
+      cb(null, true);
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
@@ -54,7 +47,7 @@ async function buildServer() {
     secret: env.SESSION_SECRET,
     cookieName: 'sessionId',
     cookie: {
-      secure: env.NODE_ENV === 'production',
+      secure: 'auto',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
       sameSite: 'lax',
