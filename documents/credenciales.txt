@@ -1,0 +1,24 @@
+=====================================================
+SISTEMA DE GESTIÓN - CLUB FARO NORTE
+Credenciales de acceso inicial (Entorno local / desarrollo)
+=====================================================
+
+URL de acceso: http://localhost:5173/
+
+USUARIO ADMINISTRADOR (Semilla inicial):
+- Email: admin@faronorte.club
+- Contraseña: Admin1234!
+- Rol: Administrador (acceso total)
+
+ROLES PREVISTOS EN EL SISTEMA:
+- Administrador: Todo, incluida Configuración y usuarios.
+- Tesorero: Cuotas, cobros, tesorería, reportes y transparencia.
+- Secretario: Padrón de socios y cuotas.
+- Profe: Acceso de solo lectura al padrón de socios activos.
+
+NOTA:
+El alta de nuevos usuarios de comisión o personal y la generación de
+contraseñas temporales se realiza desde la sección Configuración del panel
+por el Administrador. No existe recuperación automática por email.
+=====================================================
+

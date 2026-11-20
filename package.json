@@ -1,0 +1,44 @@
+{
+  "name": "gestion-faronorte",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "start": "node apps/api/dist/index.js",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"API,WEB\" -c \"cyan,magenta\" \"npm run dev -w @faronorte/api\" \"npm run dev -w @faronorte/web\"",
+    "dev:api": "npm run dev -w @faronorte/api",
+    "dev:web": "npm run dev -w @faronorte/web",
+    "build": "npm run build -w @faronorte/shared && npm run build -w @faronorte/api && npm run build -w @faronorte/web",
+    "lint": "eslint . --ext .ts,.tsx",
+    "db:generate": "npm run db:generate -w @faronorte/api",
+    "db:migrate": "npm run db:migrate -w @faronorte/api",
+    "db:seed": "npm run db:seed -w @faronorte/api"
+  },
+  "devDependencies": {
+    "@babel/parser": "^8.1.0",
+    "@types/pdfkit": "^0.17.7",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "caniuse-lite": "^1.0.30001823",
+    "concurrently": "^9.1.0",
+    "eslint": "^8.57.1",
+    "prettier": "^3.3.3",
+    "resolve": "^1.22.14",
+    "semver": "^7.8.6",
+    "terser": "^5.51.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "pdfkit": "^0.20.2",
+    "pino": "^10.4.0",
+    "recharts": "^3.11.0"
+  }
+}
