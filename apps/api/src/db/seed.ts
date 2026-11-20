@@ -9,7 +9,7 @@ export async function runSeed() {
   await runMigrations();
 
   // 1. Club
-  const clubExistente = await db.select().from(club).where(eq(club.id, 1)).get();
+  const [clubExistente] = await db.select().from(club).where(eq(club.id, 1)).limit(1);
   if (!clubExistente) {
     await db.insert(club).values({
       id: 1,
@@ -27,7 +27,7 @@ export async function runSeed() {
 
   // 2. Usuario Administrador
   const adminEmail = 'admin@faronorte.club';
-  const adminExistente = await db.select().from(usuarios).where(eq(usuarios.email, adminEmail)).get();
+  const [adminExistente] = await db.select().from(usuarios).where(eq(usuarios.email, adminEmail)).limit(1);
   if (!adminExistente) {
     const hash = await argon2.hash('Admin1234!');
     await db.insert(usuarios).values({
@@ -44,7 +44,7 @@ export async function runSeed() {
   }
 
   // 3. Cuentas iniciales (si no existen)
-  const cuentasExistentes = await db.select().from(cuentas).all();
+  const cuentasExistentes = await db.select().from(cuentas);
   if (cuentasExistentes.length === 0) {
     await db.insert(cuentas).values([
       { nombre: 'Caja efectivo', saldo_inicial: 15000, activa: true },
@@ -56,7 +56,7 @@ export async function runSeed() {
   }
 
   // 4. Categorías iniciales (si no existen)
-  const categoriasExistentes = await db.select().from(categorias).all();
+  const categoriasExistentes = await db.select().from(categorias);
   if (categoriasExistentes.length === 0) {
     await db.insert(categorias).values([
       { nombre: 'Mayor', valor_cuota_centavos: 18000, activa: true },
@@ -68,7 +68,7 @@ export async function runSeed() {
   }
 
   // 5. Rubros iniciales (si no existen)
-  const rubrosExistentes = await db.select().from(rubros).all();
+  const rubrosExistentes = await db.select().from(rubros);
   if (rubrosExistentes.length === 0) {
     await db.insert(rubros).values([
       { nombre: 'Cuotas sociales', tipo: 'ingreso', privado: false, activo: true },
