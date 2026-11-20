@@ -136,8 +136,16 @@ async function start() {
     const app = await buildServer();
     await app.listen({ port: env.PORT, host: env.HOST });
     console.log(`🚀 API Faro Norte corriendo en http://${env.HOST}:${env.PORT}`);
-  } catch (err) {
-    console.error('❌ Error al iniciar servidor:', err);
+  } catch (err: any) {
+    if (err?.code === '28P01') {
+      console.error('\n' + '='.repeat(60));
+      console.error('❌ ERROR DE AUTENTICACIÓN EN SUPABASE (Código 28P01):');
+      console.error('La contraseña en DATABASE_URL es incorrecta.');
+      console.error('Asegurate de que en Render -> Environment -> DATABASE_URL hayas reemplazado [YOUR-PASSWORD] por la contraseña real de tu proyecto Supabase (sin corchetes).');
+      console.error('='.repeat(60) + '\n');
+    } else {
+      console.error('❌ Error al iniciar servidor:', err);
+    }
     process.exit(1);
   }
 }
