@@ -17,7 +17,7 @@
     "@fastify/cookie": "^9.3.1",
     "@fastify/cors": "^8.5.0",
     "@fastify/session": "^10.9.0",
-    "@fastify/static": "^10.1.12",
+    "@fastify/static": "^7.0.4",
     "argon2": "^0.41.1",
     "better-sqlite3": "^11.5.0",
     "dotenv": "^16.4.5",
