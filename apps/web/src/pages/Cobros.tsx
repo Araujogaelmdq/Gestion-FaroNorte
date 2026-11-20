@@ -260,42 +260,47 @@ export function Cobros() {
         )}
 
         {paso === 'exito' && reciboExito && (
-          <div className="text-center space-y-3">
-            <div className="text-4xl">✅</div>
-            <p className="font-bold text-gray-900">¡Cobro registrado!</p>
-            <p className="text-sm text-gray-500">Recibo N° {String(reciboExito.numero).padStart(6,'0')} · {formatearMoneda(reciboExito.total)}</p>
-            <div className="flex gap-2 justify-center">
+          <div className="text-center space-y-3 py-4 animate-scale-in">
+            <div className="text-5xl inline-block animate-float">🎉</div>
+            <p className="text-lg font-black text-gray-900">¡Cobro registrado con éxito!</p>
+            <p className="text-xs text-gray-500 font-medium">Recibo N° {String(reciboExito.numero).padStart(6,'0')} · {formatearMoneda(reciboExito.total)}</p>
+            <div className="flex gap-2 justify-center pt-2">
               <a href={cobrosService.pdfUrl(reciboExito.id)} target="_blank" rel="noopener noreferrer">
-                <Button variant="secondary" className="text-sm">📄 Descargar PDF</Button>
+                <Button variant="secondary" className="text-xs shadow-xs">📄 Descargar PDF</Button>
               </a>
-              <Button onClick={resetear} className="text-sm">Cobrar otro</Button>
+              <Button onClick={resetear} className="text-xs shadow-md">Cobrar otro</Button>
             </div>
           </div>
         )}
       </Card>
 
       {/* Recibos emitidos */}
-      <div>
-        <h2 className="font-semibold text-gray-800 mb-2">Recibos emitidos</h2>
-        <div className="flex gap-2 mb-2 flex-wrap">
+      <div className="animate-fade-in-up">
+        <h2 className="font-bold text-gray-900 text-sm mb-2.5">Recibos emitidos</h2>
+        <div className="flex gap-2 mb-3 flex-wrap">
           <div className="flex-1 min-w-[120px]">
-            <label className="text-xs text-gray-500">Desde</label>
+            <label className="text-xs font-medium text-gray-500">Desde</label>
             <Input type="date" value={desdeR} onChange={(e) => setDesdeR(e.target.value)} />
           </div>
           <div className="flex-1 min-w-[120px]">
-            <label className="text-xs text-gray-500">Hasta</label>
+            <label className="text-xs font-medium text-gray-500">Hasta</label>
             <Input type="date" value={hastaR} onChange={(e) => setHastaR(e.target.value)} />
           </div>
           <div className="flex items-end">
-            <Button onClick={cargarRecibos} variant="secondary" className="text-sm">Ver</Button>
+            <Button onClick={cargarRecibos} variant="secondary" className="text-xs font-semibold">Ver</Button>
           </div>
         </div>
         {recibosLista.length === 0 ? (
-          <Card className="p-4 text-center text-gray-400 text-sm">No hay recibos en ese rango.</Card>
+          <Card className="p-6 text-center text-gray-400 text-xs">No hay recibos en ese rango.</Card>
         ) : (
           <div className="space-y-2">
-            {recibosLista.map((r: any) => (
-              <Card key={r.id} className={`p-3 ${r.anulado ? 'opacity-50' : ''}`}>
+            {recibosLista.map((r: any, idx: number) => (
+              <Card
+                key={r.id}
+                interactive
+                className={`p-3.5 card-interactive animate-fade-in-up ${r.anulado ? 'opacity-60 bg-gray-50/80' : ''}`}
+                style={{ animationDelay: `${Math.min(idx * 30, 300)}ms` }}
+              >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">

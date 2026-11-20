@@ -27,12 +27,12 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm animate-fade-in transition-opacity"
         onClick={() => { if (!preventClose && onClose) onClose(); }}
       />
 
       {/* Modal Dialog */}
-      <div className="relative w-full sm:max-w-md bg-white rounded-t-2xl sm:rounded-2xl shadow-xl overflow-hidden z-10 max-h-[90vh] flex flex-col">
+      <div className="relative w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden z-10 max-h-[90vh] flex flex-col animate-slide-in-up sm:animate-scale-in">
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
           <h3 className="text-base font-bold text-gray-900">{title}</h3>
           {!preventClose && onClose && (

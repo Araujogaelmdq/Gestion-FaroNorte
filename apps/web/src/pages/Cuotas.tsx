@@ -74,21 +74,24 @@ export function Cuotas() {
       <h1 className="text-xl font-bold">Cuotas</h1>
 
       {/* Selector de mes */}
-      <div className="flex items-center gap-3 justify-center">
-        <button onClick={() => cambiarMes(-1)} className="p-2 rounded-full hover:bg-gray-100 text-gray-600 text-lg">‹</button>
-        <span className="font-semibold text-gray-900 min-w-[160px] text-center">{nombreMes(periodo)}</span>
-        <button onClick={() => cambiarMes(1)} className="p-2 rounded-full hover:bg-gray-100 text-gray-600 text-lg">›</button>
+      <div className="flex items-center gap-3 justify-center bg-white p-2 rounded-2xl border border-gray-200/80 shadow-xs">
+        <button onClick={() => cambiarMes(-1)} className="p-2 rounded-xl hover:bg-orange-50 hover:text-orange-600 text-gray-600 text-base font-bold btn-press">‹</button>
+        <span className="font-bold text-gray-900 min-w-[160px] text-center text-sm">{nombreMes(periodo)}</span>
+        <button onClick={() => cambiarMes(1)} className="p-2 rounded-xl hover:bg-orange-50 hover:text-orange-600 text-gray-600 text-base font-bold btn-press">›</button>
       </div>
 
       {/* Generar cuotas */}
       {estado && estado.sinCuota > 0 && (
-        <Card className="p-4 border-l-4 border-l-yellow-400">
-          <h2 className="font-bold text-gray-900 mb-1">Generar cuotas de {nombreMes(periodo)}</h2>
-          <p className="text-sm text-gray-600 mb-2">
+        <Card className="p-4 border-l-4 border-l-amber-500 animate-fade-in-up shadow-sm">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse-glow" />
+            <h2 className="font-bold text-gray-900 text-sm">Generar cuotas de {nombreMes(periodo)}</h2>
+          </div>
+          <p className="text-xs text-gray-600 mb-1.5">
             {estado.sinCuota} socio(s) sin cuota · Vencimiento: {estado.fechaVencimiento}
           </p>
-          <p className="text-xs text-gray-400 mb-3">Si ya generaste algunas, esta acción solo genera las que faltan.</p>
-          <Button onClick={generar} disabled={generando}>
+          <p className="text-[11px] text-gray-400 mb-3">Si ya generaste algunas, esta acción solo genera las que faltan.</p>
+          <Button onClick={generar} disabled={generando} className="shadow-md">
             {generando ? 'Generando…' : `Generar ${estado.sinCuota} cuota(s)`}
           </Button>
         </Card>
@@ -96,32 +99,32 @@ export function Cuotas() {
 
       {/* Tarjetas de resumen */}
       {loadingEstado ? (
-        <p className="text-center text-gray-400 py-4">Cargando…</p>
+        <p className="text-center text-gray-400 py-4 text-xs">Cargando…</p>
       ) : estado ? (
-        <div className="grid grid-cols-2 gap-3">
-          <Card className="p-3">
-            <p className="text-xs text-gray-500 uppercase">Emitido</p>
-            <p className="text-lg font-bold text-gray-900">{formatearMoneda(estado.emitidoMonto)}</p>
-            <p className="text-xs text-gray-400">{estado.emitidas} cuota(s)</p>
+        <div className="grid grid-cols-2 gap-3 animate-fade-in-up">
+          <Card interactive className="p-3.5 card-interactive border-t-2 border-t-gray-400">
+            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Emitido</p>
+            <p className="text-lg font-black text-gray-900 mt-0.5">{formatearMoneda(estado.emitidoMonto)}</p>
+            <p className="text-[11px] text-gray-400 mt-1 font-medium">{estado.emitidas} cuota(s)</p>
           </Card>
-          <Card className="p-3">
-            <p className="text-xs text-gray-500 uppercase">Cobrado</p>
-            <p className="text-lg font-bold text-green-600">{formatearMoneda(estado.cobradoMonto)}</p>
-            <p className="text-xs text-gray-400">{estado.cobradas} cuota(s)</p>
+          <Card interactive className="p-3.5 card-interactive border-t-2 border-t-emerald-500">
+            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Cobrado</p>
+            <p className="text-lg font-black text-emerald-600 mt-0.5">{formatearMoneda(estado.cobradoMonto)}</p>
+            <p className="text-[11px] text-gray-400 mt-1 font-medium">{estado.cobradas} cuota(s)</p>
           </Card>
-          <Card className="p-3">
-            <p className="text-xs text-gray-500 uppercase">Falta cobrar</p>
-            <p className={`text-lg font-bold ${estado.faltaCobrar > 0 ? 'text-orange-500' : 'text-gray-900'}`}>
+          <Card interactive className="p-3.5 card-interactive border-t-2 border-t-orange-500">
+            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Falta cobrar</p>
+            <p className={`text-lg font-black mt-0.5 ${estado.faltaCobrar > 0 ? 'text-orange-500' : 'text-gray-900'}`}>
               {formatearMoneda(estado.emitidoMonto - estado.cobradoMonto)}
             </p>
-            <p className="text-xs text-gray-400">{estado.faltaCobrar} cuota(s)</p>
+            <p className="text-[11px] text-gray-400 mt-1 font-medium">{estado.faltaCobrar} cuota(s)</p>
           </Card>
-          <Card className="p-3">
-            <p className="text-xs text-gray-500 uppercase">Cobrabilidad</p>
-            <p className="text-lg font-bold text-blue-600">{estado.cobrabilidad}%</p>
-            <div className="mt-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+          <Card interactive className="p-3.5 card-interactive border-t-2 border-t-blue-500">
+            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Cobrabilidad</p>
+            <p className="text-lg font-black text-blue-600 mt-0.5">{estado.cobrabilidad}%</p>
+            <div className="mt-2 h-2 bg-gray-100 rounded-full overflow-hidden">
               <div
-                className="h-full bg-blue-500 rounded-full"
+                className="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-700 ease-out"
                 style={{ width: `${estado.cobrabilidad}%` }}
               />
             </div>

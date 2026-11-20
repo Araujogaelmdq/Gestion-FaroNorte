@@ -195,10 +195,12 @@ export function Socios() {
             </Card>
           ) : (
             <div className="space-y-2">
-              {socios.map((s) => (
+              {socios.map((s, idx) => (
                 <Card
                   key={s.id}
-                  className="p-3 cursor-pointer hover:bg-gray-50 active:bg-gray-100"
+                  interactive
+                  className="p-3.5 cursor-pointer card-interactive hover:border-orange-200 transition-all animate-fade-in-up"
+                  style={{ animationDelay: `${Math.min(idx * 30, 300)}ms` }}
                   onClick={() => abrirEdicion(s)}
                 >
                   <div className="flex items-start justify-between gap-2">

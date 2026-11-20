@@ -16,7 +16,9 @@ export const Layout: React.FC = () => {
 
       {/* Contenido principal */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-4 sm:py-6 pb-24">
-        <Outlet />
+        <div key={window.location.pathname} className="animate-fade-in-up">
+          <Outlet />
+        </div>
       </main>
 
       {/* Navegación móvil inferior fija */}

@@ -61,12 +61,12 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-50 flex">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
 
       {/* Drawer */}
-      <div className="relative w-72 max-w-[82vw] bg-white border-r border-gray-200 flex flex-col h-full z-10 shadow-xl">
+      <div className="relative w-72 max-w-[82vw] bg-white border-r border-gray-200 flex flex-col h-full z-10 shadow-2xl animate-slide-in-left">
         {/* Header */}
         <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-orange-50">
           <div className="flex items-center gap-2.5">

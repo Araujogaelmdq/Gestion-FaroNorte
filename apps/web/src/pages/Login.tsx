@@ -47,20 +47,26 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50 flex flex-col justify-center items-center px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-orange-100/60 via-white to-blue-50/70 flex flex-col justify-center items-center px-4 py-8 relative overflow-hidden">
+      {/* Círculos decorativos de fondo con animación */}
+      <div className="absolute -top-32 -left-32 w-80 h-80 bg-orange-400/15 rounded-full blur-3xl pointer-events-none animate-float" />
+      <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-blue-400/15 rounded-full blur-3xl pointer-events-none animate-float" style={{ animationDelay: '2s' }} />
+
       {/* Tarjeta de Login */}
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm relative z-10 animate-fade-in-up">
         <div className="text-center mb-6">
           <div className="inline-block relative mb-3">
-            <img
-              src={escudoSrc}
-              alt={`Club ${nombreClub}`}
-              className="w-24 h-24 mx-auto rounded-2xl shadow-lg border-2 border-orange-200 object-cover"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = '/LogoFN.jpg';
-              }}
-            />
-            <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-orange-500 rounded-full border-2 border-white" />
+            <div className="relative">
+              <img
+                src={escudoSrc}
+                alt={`Club ${nombreClub}`}
+                className="w-24 h-24 mx-auto rounded-3xl shadow-xl border-2 border-orange-200/80 object-cover animate-float"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = '/LogoFN.jpg';
+                }}
+              />
+              <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-orange-500 rounded-full border-2 border-white animate-pulse-glow" />
+            </div>
           </div>
           <h1 className="text-2xl font-black uppercase tracking-wider text-gray-900">
             {nombreClub}
@@ -70,11 +76,12 @@ export const Login: React.FC = () => {
           </p>
         </div>
 
-        <Card padding="lg" className="shadow-xl">
+        <Card padding="lg" className="shadow-2xl shadow-orange-500/10 border-gray-100 backdrop-blur-sm bg-white/95">
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-700 font-medium">
-                {error}
+              <div className="bg-red-50 border border-red-200/90 rounded-xl p-3 text-xs text-red-700 font-medium animate-fade-in-down flex items-center gap-2">
+                <span className="text-red-500">⚠️</span>
+                <span>{error}</span>
               </div>
             )}
 
@@ -86,7 +93,7 @@ export const Login: React.FC = () => {
               placeholder="ejemplo@faronorte.club"
               required
               autoComplete="email"
-              leftIcon={<Mail className="w-4 h-4" />}
+              leftIcon={<Mail className="w-4 h-4 text-gray-400" />}
             />
 
             <Input
@@ -97,12 +104,12 @@ export const Login: React.FC = () => {
               placeholder="Tu contraseña"
               required
               autoComplete="current-password"
-              leftIcon={<Lock className="w-4 h-4" />}
+              leftIcon={<Lock className="w-4 h-4 text-gray-400" />}
               rightIcon={
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="hover:text-gray-700 transition-colors"
+                  className="hover:text-orange-500 text-gray-400 transition-colors p-1"
                   aria-label={showPassword ? 'Ocultar contraseña' : 'Ver contraseña'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -116,9 +123,9 @@ export const Login: React.FC = () => {
               fullWidth
               size="lg"
               isLoading={isLoading}
-              className="font-bold tracking-wide shadow-md"
+              className="font-bold tracking-wide shadow-lg shadow-orange-500/25 mt-2"
             >
-              Entrar
+              Entrar al Club
             </Button>
           </form>
 
