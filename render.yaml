@@ -3,12 +3,10 @@ services:
     name: faronorte-gestion
     runtime: node
     plan: free
-    buildCommand: npm install --production=false && npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm run start
     healthCheckPath: /api/health
     envVars:
-      - key: NODE_ENV
-        value: production
       - key: HOST
         value: 0.0.0.0
       - key: SESSION_SECRET
