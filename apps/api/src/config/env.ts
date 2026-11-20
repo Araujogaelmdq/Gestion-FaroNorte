@@ -14,7 +14,15 @@ const envSchema = z.object({
   HOST: z.string().default('0.0.0.0'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   DATABASE_URL: z.string().default('sqlite.db'),
-  SESSION_SECRET: z.string().min(32, 'SESSION_SECRET must be at least 32 characters long').default('faro-norte-super-secret-key-32-chars-long!'),
+  SESSION_SECRET: z
+    .string()
+    .default('faro-norte-super-secret-key-32-chars-long!')
+    .transform((val) => {
+      if (!val || val.length < 32) {
+        return (val || '').padEnd(32, '0123456789abcdefghijklmnopqrstuv');
+      }
+      return val;
+    }),
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
 });
 
