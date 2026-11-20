@@ -215,3 +215,4 @@ SELECT setval('categorias_id_seq', (SELECT MAX(id) FROM categorias));
 SELECT setval('cuentas_id_seq', (SELECT MAX(id) FROM cuentas));
 SELECT setval('rubros_id_seq', (SELECT MAX(id) FROM rubros));
 SELECT setval('familias_id_seq', (SELECT MAX(id) FROM familias));
+

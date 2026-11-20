@@ -9,7 +9,7 @@ Esta guía explica cómo desplegar el sistema en **Render** (aplicación web) co
 1. Entrá en [supabase.com](https://supabase.com/) e iniciá sesión (o creá cuenta gratuita).
 2. Creá un nuevo proyecto:
    - **Name**: `faronorte-db`
-   - **Database Password**: Elegí una contraseña segura y anotala.
+   - **Database Password**: Elegí una contraseña segura y anotala. (faro12012008norte)
    - **Region**: South America (São Paulo) o la más cercana.
 3. Una vez creado el proyecto, andá al menú lateral **SQL Editor**.
 4. Hacé clic en **New query**, abrí el archivo [`documents/supabase_setup.sql`](./supabase_setup.sql), copiá todo su contenido y pegalo en el editor.
@@ -18,6 +18,7 @@ Esta guía explica cómo desplegar el sistema en **Render** (aplicación web) co
 7. En la sección **Connection string**, seleccioná **URI** (modo `Session` o `Transaction`, preferentemente `Session` puerto 5432 o `Transaction` puerto 6543) y copiá la URL, reemplazando `[YOUR-PASSWORD]` por la contraseña que creaste.
    Ejemplo:
    `postgresql://postgres:[TU-PASSWORD]@db.[REF].supabase.co:5432/postgres`
+   (postgresql://postgres.eixzjzununvclrpbjrsk:[faro12012008norte]@aws-0-us-west-2.pooler.supabase.com:5432/postgres)
 
 ---
 
