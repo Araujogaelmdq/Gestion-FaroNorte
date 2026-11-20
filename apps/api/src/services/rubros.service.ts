@@ -7,7 +7,7 @@ export async function getRubrosService(
   soloActivos = false,
   tipo?: TipoRubro
 ): Promise<Rubro[]> {
-  const rows = await db.select().from(rubros).all();
+  const rows = await db.select().from(rubros);
 
   let filtrados = rows;
   if (soloActivos) {

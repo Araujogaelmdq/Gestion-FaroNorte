@@ -5,7 +5,7 @@ import { Categoria, CategoriaInput } from '@faronorte/shared';
 
 export async function getCategoriasService(soloActivas = false): Promise<Categoria[]> {
   const query = db.select().from(categorias);
-  const rows = await query.all();
+  const rows = await query;
 
   const filtradas = soloActivas ? rows.filter((c) => c.activa) : rows;
 

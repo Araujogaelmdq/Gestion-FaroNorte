@@ -13,11 +13,11 @@ export class AppError extends Error {
 }
 
 export async function loginService(email: string, contrasena: string) {
-  const usuario = await db
+  const [usuario] = await db
     .select()
     .from(usuarios)
     .where(eq(usuarios.email, email.toLowerCase().trim()))
-    .get();
+    .limit(1);
 
   if (!usuario) {
     throw new AppError('Credenciales incorrectas', 401);
@@ -43,7 +43,7 @@ export async function loginService(email: string, contrasena: string) {
 }
 
 export async function getMeService(userId: number) {
-  const usuario = await db.select().from(usuarios).where(eq(usuarios.id, userId)).get();
+  const [usuario] = await db.select().from(usuarios).where(eq(usuarios.id, userId)).limit(1);
 
   if (!usuario) {
     throw new AppError('Usuario no encontrado', 404);
@@ -72,7 +72,7 @@ export async function cambiarClaveService(
     throw new AppError('La nueva contraseña debe tener al menos 8 caracteres', 400);
   }
 
-  const usuario = await db.select().from(usuarios).where(eq(usuarios.id, userId)).get();
+  const [usuario] = await db.select().from(usuarios).where(eq(usuarios.id, userId)).limit(1);
   if (!usuario) {
     throw new AppError('Usuario no encontrado', 404);
   }

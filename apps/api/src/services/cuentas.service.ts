@@ -4,7 +4,7 @@ import { cuentas, movimientos, recibos } from '../db/schema.js';
 import { Cuenta, CuentaInput } from '@faronorte/shared';
 
 export async function getCuentasService(soloActivas = false): Promise<Cuenta[]> {
-  const rows = await db.select().from(cuentas).all();
+  const rows = await db.select().from(cuentas);
   const filtradas = soloActivas ? rows.filter((c) => c.activa) : rows;
 
   return filtradas.map((c) => ({
